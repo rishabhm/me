@@ -1,0 +1,29 @@
+body {
+	/*font-size: 30px;*/
+}
+
+#user_info {
+	position: relative;
+	opacity: 0;
+	display: none;
+}
+
+input {
+	font-size: 25px;
+}
+
+input[type="text"], input[type="password"]{
+	size: 150px;
+	display: block;
+	margin: 15px;
+}
+
+a {
+	padding: 10px;
+	background-color: #222;
+	font-size: 25px;
+	color: #fff;
+	cursor: pointer;
+	margin: 0px 10px;
+	display: inline-block;
+}

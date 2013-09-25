@@ -1,0 +1,32 @@
+//- CSS includes
+link(rel="stylesheet", href="styles/main.css")
+link(href='http://fonts.googleapis.com/css?family=Amatic+SC', rel='stylesheet', type='text/css')
+
+//- Client-side Javascript
+script(type='text/javascript', src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js")
+script(type='text/javascript', src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.10/socket.io.min.js")
+script(type='text/javascript', src="js/main.js")
+
+body
+	h1
+		| Air Printing
+	div.container#landing_div
+		input#need_text(type='text', placeholder='Need a printer? Tell us where you are!', size='100')
+		a#need_btn
+			| Search
+		a#have_btn
+			| I have a printer
+	div.container#user_info
+		input#user_name(type='text', placeholder='User name')
+		input#email(type='text', placeholder='Email')
+		input#password1(type='password', placeholder='Password')
+		input#password2(type='password', placeholder='Confirm password')
+		a#save_user_info
+			| Save
+		| OR
+		a#register_with_facebook(href='/auth/facebook')
+			| Register with facebook
+
+
+	
+
