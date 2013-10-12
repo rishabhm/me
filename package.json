@@ -12,6 +12,7 @@
 		"jade" 		: "*",
 		"passport"	: "*",
 		"passport-facebook" : "*",
-		"passport-local"	: "*"
+		"passport-local"	: "*",
+		"socket.io"	: "*"
 	}
 }
