@@ -5,7 +5,7 @@ module.exports = function (app, io) {
 		passport = require('passport');
 
 	app.get('/home', main.home);
-
+	app.get('/*', main.home);
 	app.get('/auth/facebook',
     passport.authenticate('facebook', {
       scope: [ 'email', 'user_about_me'],

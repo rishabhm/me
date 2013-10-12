@@ -3,6 +3,7 @@ var mongoose 	= require('mongoose'),
 
 exports.home = function (req, res) {
 	Users.find({}, function (err, data) {
+		console.log('rendering home');
 		res.render('home', {});
 	});
 }
