@@ -1,0 +1,105 @@
+body {
+	overflow: scroll;
+	text-align: center;
+	padding-top: 5px;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 10pt;
+}
+
+.description {
+	font-size: 15pt;
+	color: #555;
+}
+
+.description h2, .description h3 {
+	display: block;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	color: #111;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #777;
+}
+
+a {
+	text-decoration: none;
+	color: #fff;
+}
+
+.mbot15 {
+	margin-bottom: 25px;
+}
+
+
+.buttons {
+	margin: 5px auto;
+	margin-top: 5px;
+	text-align: center;
+	padding: 5px 10px;
+	color: #fff;
+	letter-spacing: 2;
+}
+
+.btn {
+	display: inline-block;
+	margin: 0 2px;
+	width: 200px;
+	font-size: 12pt;
+	transition : background-color 0.5s, opacity 0.5s;
+	cursor: pointer;
+	background-color: #777;
+	padding: 3px 0;
+}
+
+.submit {
+	opacity: 0.5;
+	margin-right: 10px;
+}
+
+.btn:hover {
+	background-color: #555;
+}
+
+.month {
+	margin: 10px;
+	display: inline-block;
+	width: 275px;
+	text-align: center;
+	vertical-align: top;
+}
+
+.month .heading {
+	text-align: center;
+	width: 100%;
+	font-size: 16pt;
+	padding: 2px 0;
+	color: #fff;
+	background-color: #4682B4;
+}
+
+.month .days {
+	vertical-align: middle;
+	text-align: center;
+}
+
+.month .day {
+	padding: 3px 3px;
+	width: 10%;
+	font-size: 12pt;
+	text-align: center;
+	display: inline-block;
+	color: rgba(0,0,0,0.5);
+	transition: color 0.25s, border 0.5s;
+	border: 1px solid #fff;
+	cursor: pointer;
+}
+
+.month .day:hover {
+	color: rgba(0,0,0,0.9);
+	/*border: 1px solid #777;*/
+}
+
+.month .day.selected {
+	color: rgba(0,0,0,0.9);
+	border: 1px solid #777;	
+}

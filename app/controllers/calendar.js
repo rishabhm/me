@@ -23,6 +23,7 @@ calculateOffsets()
 // calculateResult()
 
 exports.home = function (req, res) {
+	console.log("Inside calendar")
 	res.render("calendar")
 }
 
@@ -59,7 +60,7 @@ function calculateOffsets() {
 		month_offset[month_data[i]['month_name']] = offset
 		offset = 0
 	}
-	console.log(month_offset)
+	// console.log(month_offset)
 }
 
 
@@ -72,57 +73,3 @@ exports.calcResult = function (req, res) {
 			res.send(to_send)
 		})
 }
-
-// exports.submitDates = function (socket, data) {
-// 	var selected_dates = data.dates,
-// 		data = {
-// 			JANUARY : [],
-// 			FEBRUARY : [],
-// 			MARCH : [],
-// 			APRIL : [],
-// 			MAY : [],
-// 			JUNE : [],
-// 			JULY : [],
-// 			AUGUST : [],
-// 			SEPTEMBER : [],
-// 			OCTOBER : [],
-// 			NOVEMBER : [],
-// 			DECEMBER : []
-// 		}
-// 	selected_dates.forEach(function (date) {
-// 		if (result[date]) result[date]++
-// 		else result[date] = 1
-// 		if (result[date] > max_result['value']) {
-// 			max_result['value'] = result[date]
-// 			max_result['date'] = date
-// 		}
-
-// 		var month = date.split('#')[1].split(' ')[0],
-// 			day = parseInt(date.split('#')[2])
-// 		data[month].push(day)
-// 	})
-// 	var newDates = new Dates(data)
-// 	newDates.save(function (e1, d1) {
-// 		socket.emit('datesSaved', {result : result, max_result : max_result})
-// 	})
-// }
-
-// function calculateResult () {
-// 	var identifier = ""
-// 	Dates.find({}, function (err, docs) {
-// 		docs.forEach(function (dateSet) {
-// 			month_name_list.forEach(function (month_name) {
-// 				dateSet[month_name].forEach(function (day) {
-// 					var identifier = "#" + month_name + " #" + day.toString()
-// 					if (result[identifier]) result[identifier]++
-// 					else result[identifier] = 1
-// 					if (result[identifier] > max_result['value']) {
-// 						max_result['value'] = result[identifier]
-// 						max_result['date'] = identifier
-// 					}
-// 				})
-// 			})
-// 		})
-// 		// console.log(result, max_result)
-// 	})
-// }

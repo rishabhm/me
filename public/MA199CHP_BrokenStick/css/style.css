@@ -1,0 +1,58 @@
+body {
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+}
+
+#viewport {
+	height: 30px;
+	width: 90%;
+	margin: 25px auto;
+	/*background-color: rgba(0,0,0,0.5);*/
+	cursor: pointer;
+	opacity: 1;
+	transition: opacity 0.25s;
+}
+
+.result {
+	margin: 5px;
+	font-size: 15pt;	
+}
+
+.disp_result {
+	opacity: 0;
+	transition: opacity 0.25s;
+}
+
+.repeat {
+	display: inline-block;
+	padding: 5px 25px;
+	background-color: #333;
+	color: #fff;
+	cursor: pointer;
+	margin-top: 25px;
+}
+
+.clickCount {
+	margin: 15px;
+	font-size: 15pt;
+	color: #aaa;
+	letter-spacing: 2;
+}
+
+.submit_btn {
+	display: inline-block;
+	color: #fff;
+	background-color: #666;
+	padding: 10px 30px;
+	font-size: 15pt;
+	letter-spacing: 2;
+	margin: 10px;
+	opacity: 0;
+	transition: opacity 0.25s;
+	cursor: pointer;
+}
+
+.successMessage {
+	opacity: 0;
+	transition: opacity 0.25s;
+}
