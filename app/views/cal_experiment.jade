@@ -1,0 +1,16 @@
+include cal_header
+.description
+	| Tap on any 20 dates
+.buttons
+	.submit.btn(active = "false") SUBMIT
+	//- .showResult.btn SHOW RESULT
+for month in data
+	.month(id = month.month_name)
+		.heading
+			= month.month_name
+		.days
+			- for (var i=1; i<=month.month_length; i++) {
+				.day(id = i, active = 'false')
+					= i
+			- }
+
