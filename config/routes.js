@@ -6,11 +6,11 @@ module.exports = function (app, io) {
 		randomClicks = require('../app/controllers/randomClicks.js'),
 		passport = require('passport');
 
-	app.get('/MA199CHP_RandomClickData', randomClicks.showData)
-	app.get('/MA199CHP_RandomDateExp', calendar.home)
-	app.get('/MA199CHP_RandomDateExp_experiment', calendar.experiment)
-	app.get('/MA199CHP_RandomDateExp_result', calendar.result)
-	app.get('/MA199CHP_RandomDateExp_calc', calendar.calcResult)
+	app.get('/Math199CHP_RandomClickData', randomClicks.showData)
+	app.get('/Math199CHP_RandomDateExp', calendar.home)
+	app.get('/Math199CHP_RandomDateExp_experiment', calendar.experiment)
+	app.get('/Math199CHP_RandomDateExp_result', calendar.result)
+	app.get('/Math199CHP_RandomDateExp_calc', calendar.calcResult)
 	app.get('/home', main.home);
 	app.get('/', main.home);
 	app.get('/auth/facebook',
