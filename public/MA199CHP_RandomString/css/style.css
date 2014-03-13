@@ -1,0 +1,102 @@
+body {
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+	color: #444;
+	margin: 0;
+}
+
+.left_col {
+	width: 20%;
+	float: left;
+	display: inline-block;
+	height: 100%;
+	text-align: center;
+	background-color: #666;
+	padding: 10px;
+	color: #fff;
+}
+
+.right_col {
+	display: inline-block;
+	vertical-align: top;
+	width: 70%;
+	height: 100%;
+}
+
+h1 {
+	font-size: 35pt;
+	margin: 15px;
+}
+
+.coins {
+	margin: 10px;
+}
+
+.coins img {
+	margin: 20px;
+	height: 200px;
+	opacity: 0.5;
+	cursor: pointer;
+}
+
+.coins img:active {
+	opacity: 1;
+}
+
+.current_sequence {
+	word-wrap: break-word;
+}
+
+.H {
+	display: inline-block;
+	font-size: 12pt;
+	padding: 4px;
+	background-color : #4c009b;
+	color : #fff;
+}
+
+.T {
+	display: inline-block;
+	font-size: 12pt;
+	padding: 4px;
+	background-color : #044cac;
+	color : #fff;
+}
+
+.random_options {
+	margin: 20px auto;
+	width: 240px;
+   	height: 34px;
+   	overflow: hidden;
+   	background: url("../resources/down_arrow_select.jpg") no-repeat right #ddd;
+   	border: 1px solid #ccc;
+}
+
+.random_options select {
+	background: transparent;
+   	width: 268px;
+   	padding: 5px;
+   	font-size: 16px;
+   	line-height: 1;
+   	border: 0;
+   	border-radius: 0;
+   	height: 34px;
+   -webkit-appearance: none;
+}
+
+select {
+	font-size: 25px;
+}
+
+.clear {
+	margin: 10px auto;
+	margin-top: 20px;
+	width: 180px;
+	text-align: center;
+	padding: 3px 30px;
+	color: #444;
+	font-size: 16pt;
+	background-color: #ddd;
+	letter-spacing: 2;
+	cursor: pointer;
+}
