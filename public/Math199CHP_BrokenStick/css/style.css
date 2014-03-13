@@ -14,7 +14,7 @@ body {
 }
 
 .result {
-	margin: 5px;
+	margin: 15px;
 	font-size: 15pt;	
 }
 
@@ -23,14 +23,14 @@ body {
 	transition: opacity 0.25s;
 }
 
-.repeat {
+/*.repeat {
 	display: inline-block;
 	padding: 5px 25px;
 	background-color: #333;
 	color: #fff;
 	cursor: pointer;
 	margin-top: 25px;
-}
+}*/
 
 .clickCount {
 	margin: 15px;
@@ -48,6 +48,18 @@ body {
 	letter-spacing: 2;
 	margin: 10px;
 	opacity: 0;
+	transition: opacity 0.25s;
+	cursor: pointer;
+}
+
+.gen_random, .repeat {
+	display: inline-block;
+	color: #fff;
+	background-color: #666;
+	padding: 10px 30px;
+	font-size: 15pt;
+	letter-spacing: 2;
+	margin: 10px;
 	transition: opacity 0.25s;
 	cursor: pointer;
 }

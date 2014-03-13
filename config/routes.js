@@ -4,9 +4,11 @@ module.exports = function (app, io) {
 		users = require('../app/controllers/users'),
 		calendar = require('../app/controllers/calendar.js'),
 		randomClicks = require('../app/controllers/randomClicks.js'),
+		randomStrings = require('../app/controllers/randomStrings.js'),
 		passport = require('passport');
 
 	app.get('/Math199CHP_RandomClickData', randomClicks.showData)
+	app.get('/Math199CHP_RandomStringData', randomStrings.showData)
 	app.get('/Math199CHP_RandomDateExp', calendar.home)
 	app.get('/Math199CHP_RandomDateExp_experiment', calendar.experiment)
 	app.get('/Math199CHP_RandomDateExp_result', calendar.result)
@@ -29,6 +31,9 @@ module.exports = function (app, io) {
 		})
 		socket.on('addData', function (data) {
 			randomClicks.addData(socket, data)
+		})
+		socket.on('addString', function (data) {
+			randomStrings.addData(socket, data)
 		})
 		socket.on('testingSocket', function (data) {
 			console.log(data);

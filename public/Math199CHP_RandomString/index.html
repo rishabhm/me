@@ -1,0 +1,43 @@
+
+<!-- Javascript files -->
+<script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script type='text/javascript' src="js/socket.io.min.js"></script>
+<script type='text/javascript' src="tests/chi_sq.js"></script>
+<script type='text/javascript' src="js/main.js"></script>
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="css/style.css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+<body>
+	<div class="left_col">
+		Want to see how some famous random numbers perform on our test? Select one from the dropdown menu!
+		<div class="random_options">
+			<select class="rand_opt">
+				<option value="default">Pick one below!</option>
+				<option value="cg">Computer generated</option>
+				<option value="pi">Binary digits of Pi</option>
+				<option value="2">Binary digits of sqrt(2)</option>
+				<option value="1729">Binary digits of sqrt(1729)</option>
+				<option value="11213">Binary digits of sqrt(11213)</option>
+				<option value="phi">The Golden Ratio</option>
+			</select>
+		</div>
+		<hr color="#eee">
+		<div class="clear">
+			CLEAR
+		</div>
+	</div>
+	<div class="right_col">
+		<h1>Can you fake Coin tosses?</h1>
+		Try to fake a sequence of coin tosses by clicking on either side of the coin or typing "H" or "T".
+		<div class="coins">
+			<img src="resources/heads.png" name="heads" class="h_coin">
+			<img src="resources/tails.png" name="tails" class="t_coin">
+		</div>
+		<div class="result" style="font-size:25pt; margin-bottom:25px;">
+		</div>
+		<div class="current_sequence">
+		</div>
+	</div>
+</body>
