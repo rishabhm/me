@@ -137,7 +137,7 @@ function sleep(seq, n) {
 }
 
 function sim(seq, j) {
-	calcHumanProb(seq.slice(0,j))
+	calcHumanProb(seq.slice(0,j+1))
 	displayCharacter(seq[j-1] == "0")
 }
 
