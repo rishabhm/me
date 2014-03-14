@@ -22,7 +22,7 @@ var pre_values = {
 	"2" : "01101010000010011110011001100111111100111011110011001001000010001011001011111011000100110110011011101010100101010111110100111110001110101101111011000001011101010001001001110111010100001001100111011010",
 	"1729" : "10010100110011001000010111100000001011110100101011110111011000001101110111001110101000000111110111110100001001011101000111111001000100101000111101001111111010111111110110111111110011000001100111110100",
 	"11213" :"11100100001101100101000111101010101111010011010101001111000010010111001000101011000101001001001000011110110101110111100100101000111110011111110110111110011000010011001000010100111110010101110001010100",
-	"pi" : "00100100001111110110101010001000100001011010001100001000110100110001001100011001100010100010111000000011011100000111001101000100101001000000100100111000001000100010100110011111001100011101000000001000",
+	"phi" : "10100011000110100000101111010011111000000100000011001000001010101111101011100101000000001101001110011100001111001000010110000010001100000001100001101010110001110000011100101011101111000111101011110111",
 }
 
 var probabilities = [0.25,0.20,0.15,0.10,0.05,0.025,0.02,0.01,0.005,0.0025,0.001,0.0005]
@@ -59,7 +59,7 @@ $(document).ready(function () {
 
 	$('.rand_opt').on('change', function (e) {
 		var value = $(e.currentTarget).val()
-		reset()
+		reset(true)
 		displayPreProgrammed(value)
 	})
 
@@ -117,7 +117,8 @@ function calcHumanProb(seq) {
 			probGap = 1 - chi_sq_3.getProbability(3, gaps)
 			prob3 = 1 - chi_sq_3.getProbability(7, chi3),
 			prob4 = 1 - chi_sq_4.getProbability(15, chi3),
-			prob = Math.max(prob3, prob4, probGap)
+			chi_avg = (prob3 + prob4)/2,
+			prob = Math.max(chi_avg, probGap)
 	updateResult(prob, seq.length)
 }
 
@@ -136,14 +137,7 @@ function sleep(seq, n) {
 }
 
 function sim(seq, j) {
-	var chi3 = chi_sq_3.calcChiSquare(seq.slice(0,j)),
-			chi4 = chi_sq_4.calcChiSquare(seq.slice(0,j))
-			gaps = gapTest(seq.slice(0,j)),
-			probGap = 1 - chi_sq_3.getProbability(3, gaps)
-			prob3 = 1 - chi_sq_3.getProbability(7, chi3),
-			prob4 = 1 - chi_sq_4.getProbability(15, chi3),
-			prob = Math.max(prob3, prob4, probGap)
-	updateResult(prob, j+1)
+	calcHumanProb(seq.slice(0,j))
 	displayCharacter(seq[j-1] == "0")
 }
 
@@ -219,7 +213,7 @@ function updateResult(n, count) {
 	}
 	if (n < 0.9) {
 		$('.result').css('background-color', GREEN)
-		$('.result').html("You are quite random" + "<br>" + count.toString() + " tosses complete")
+		$('.result').html("Looks random" + "<br>" + count.toString() + " tosses complete")
 	} else if (n < 0.95) {
 		$('.result').css('background-color', YELLOW)
 		$('.result').html("90% LIKELY FAKE" + "<br>" + count.toString() + " tosses complete")

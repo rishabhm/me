@@ -24,8 +24,6 @@ var ChiSquare = (function () {
 	}
 
 	ChiSquare.prototype.calcChiSquare = function (str) {
-		// console.log(this.block_length)
-		// console.log(str)
 		var cs = 0,
 			ep = (str.length / this.block_length) / Math.pow(2,this.block_length),
 			self = this
@@ -36,7 +34,6 @@ var ChiSquare = (function () {
 					o++
 				}
 			}
-			// console.log(o, ep)
 			cs += (o-ep) * (o-ep) / (ep)
 		})
 		return cs

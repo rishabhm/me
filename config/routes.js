@@ -7,6 +7,9 @@ module.exports = function (app, io) {
 		randomStrings = require('../app/controllers/randomStrings.js'),
 		passport = require('passport');
 
+	app.get('/Math199CHP', function (req, res) {
+		res.render("math199")
+	})
 	app.get('/Math199CHP_RandomClickData', randomClicks.showData)
 	app.get('/Math199CHP_RandomStringData', randomStrings.showData)
 	app.get('/Math199CHP_RandomDateExp', calendar.home)

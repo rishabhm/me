@@ -68,6 +68,7 @@ $(document).ready(function () {
 
 	$('.gen_random').on('click', function (e) {
 		reset()
+		click_count = CLICK_LIMIT
 		points = []
 		for (var i=0; i<CLICK_LIMIT; i++) {
 			points.push(Math.random())
@@ -81,6 +82,8 @@ $(document).ready(function () {
 		// $('.gen_random').css('opacity','0.5')
 		// sendData()
 		pointsEntered()
+		bar.css('opacity', '0.5')
+		$('.clickCount').css('opacity','0.5')
 		// showSubmitBtn()
 	})
 })
