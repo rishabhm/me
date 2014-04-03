@@ -1,3 +1,7 @@
+if (typeof exports == "undefined") {
+	exports = this;
+}
+
 var ChiSquare = (function () {
 
 	function ChiSquare(n) {
@@ -7,19 +11,20 @@ var ChiSquare = (function () {
 	}
 
 	ChiSquare.prototype.getProbability = function (deg, cs) {
-		var probabilities = {
-			0 : [ 0.995, 0.990, 0.975, 0.950,0.900, 0.100, 0.050, 0.025, 0.010, 0.005],
-			3 : [0.072,0.115,0.216,0.352,0.584,6.251,7.815,9.348,11.345,12.838],
-			7 : [0.989,1.239,1.690,2.167,2.833,12.017,14.067,16.013,18.475,20.278],
-			15 : [4.601,5.229,6.262,7.261,8.547,22.307,24.996,27.488,30.578,32.801]
-		}
+		return ChiSquareData[deg][parseFloat(cs).toFixed(1)]
+		// var probabilities = {
+		// 	0 : [ 0.995, 0.990, 0.975, 0.950,0.900, 0.100, 0.050, 0.025, 0.010, 0.005],
+		// 	3 : [0.072,0.115,0.216,0.352,0.584,6.251,7.815,9.348,11.345,12.838],
+		// 	7 : [0.989,1.239,1.690,2.167,2.833,12.017,14.067,16.013,18.475,20.278],
+		// 	15 : [4.601,5.229,6.262,7.261,8.547,22.307,24.996,27.488,30.578,32.801]
+		// }
 
-		for (var i=1; i<probabilities[deg].length; i++) {
-			if (cs < probabilities[deg][i])
-				return probabilities[0][i-1]
-		}
+		// for (var i=1; i<probabilities[deg].length; i++) {
+		// 	if (cs < probabilities[deg][i])
+		// 		return probabilities[0][i-1]
+		// }
 
-		return 0
+		// return 0
 
 	}
 
@@ -37,6 +42,21 @@ var ChiSquare = (function () {
 			cs += (o-ep) * (o-ep) / (ep)
 		})
 		return cs
+	}
+
+	ChiSquare.prototype.getBlockBreakdown = function (str) {
+		var res = {},
+			self = this
+		this.blocks.forEach(function (block) {
+			var o = 0
+			for (var i = 1; i*self.block_length < str.length; i++) {
+				if (str.slice((i-1)*self.block_length, i*self.block_length) == block) {
+					o++
+				}
+			}
+			res[block] = o
+		})
+		return res
 	}
 
 	ChiSquare.prototype.calcChiSquareArr = function (arr) {
@@ -65,7 +85,22 @@ var ChiSquare = (function () {
 		return result
 	}
 
+	ChiSquare.prototype.getBlocks = function() {
+		return this.blocks
+	}
+
+	ChiSquare.prototype.getOverlappingBlockFreq = function (str) {
+		var retVal = {}
+		for (var i=0; i<str.length - this.block_length; i++) {
+			var piece = str.slice(i,i+this.block_length)
+			if (!retVal[piece])
+				retVal[piece] = 0
+			retVal[piece]++
+		}
+		return retVal
+	}
+
 	return ChiSquare
 })()
 
-// exports.ChiSquareTest = ChiSquare
+exports.ChiSquareTest = ChiSquare

@@ -3,6 +3,8 @@ body {
 	font-family: 'Open Sans', sans-serif;
 	color: #444;
 	margin: 0;
+	width: 100%;
+	background-color: #f8e4d3;
 }
 
 .left_col {
@@ -11,7 +13,7 @@ body {
 	display: inline-block;
 	height: 100%;
 	text-align: center;
-	background-color: #666;
+	background-color: #2d6da8;
 	padding: 10px;
 	color: #fff;
 }
@@ -19,7 +21,7 @@ body {
 .right_col {
 	display: inline-block;
 	vertical-align: top;
-	width: 70%;
+	width: 70%;	
 	height: 100%;
 }
 
@@ -51,7 +53,7 @@ h1 {
 	display: inline-block;
 	font-size: 12pt;
 	padding: 4px;
-	background-color : #4c009b;
+	background-color : #199B00;
 	color : #fff;
 }
 
@@ -94,9 +96,70 @@ select {
 	width: 180px;
 	text-align: center;
 	padding: 3px 30px;
-	color: #444;
-	font-size: 16pt;
-	background-color: #ddd;
+	color: #fff;
+	font-size: 19pt;
+	background-color: #d83434;
+	letter-spacing: 2;
+	cursor: pointer;
+}
+
+.result {
+	font-size:25pt;
+	margin-bottom:25px;
+	display: block;
+	width: 80%;
+	margin: 5px 10%; 
+	background-color: #2d6da8;
+	color: #fff;
+	padding: 5px;
+}
+
+.instructions .body {
+	text-align: left;
+}
+
+.container_mobile {
+	margin: 0 5%;
+	width: 90%;
+	text-align: center;
+}
+
+.container_mobile .coins img {
+	margin: 20px;
+	height: 300px;
+	opacity: 0.5;
+	cursor: pointer;
+}
+
+.container_mobile .H {
+	display: inline-block;
+	font-size: 24pt;
+	padding: 4px;
+	background-color : #199B00;
+	color : #fff;
+}
+
+.container_mobile .T {
+	display: inline-block;
+	font-size: 24pt;
+	padding: 4px;
+	background-color : #044cac;
+	color : #fff;
+}
+
+.container_mobile .result {
+	font-size: 40pt;
+}
+
+.container_mobile .mob_rand_seq {
+	margin: 10px auto;
+	margin-top: 20px;
+	width: 90%;
+	text-align: center;
+	padding: 3px 30px;
+	color: #fff;
+	font-size: 19pt;
+	background-color: #fa8400;
 	letter-spacing: 2;
 	cursor: pointer;
 }

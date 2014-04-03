@@ -9,6 +9,8 @@ var GREEN = "#15b01a",
 	RED = "#e50000",
 	ORANGE = "#fa8400"
 
+var START_ANALYSIS_AT = 5
+
 var socket = io.connect("/")
 
 var chi_sq_3, chi_sq_4
@@ -27,15 +29,55 @@ var pre_values = {
 
 var probabilities = [0.25,0.20,0.15,0.10,0.05,0.025,0.02,0.01,0.005,0.0025,0.001,0.0005]
 
+var device = "web"
+
 $(document).ready(function () {
+	// JQuery plpugin to catch double-tap
+	(function($) {
+	  var IS_IOS = /iphone|ipad/i.test(navigator.userAgent);
+	  $.fn.nodoubletapzoom = function() {
+	    if (IS_IOS)
+	      $(this).bind('touchstart', function preventZoom(e) {
+	        var t2 = e.timeStamp
+	          , t1 = $(this).data('lastTouch') || t2
+	          , dt = t2 - t1
+	          , fingers = e.originalEvent.touches.length;
+	        $(this).data('lastTouch', t2);
+	        if (!dt || dt > 500 || fingers > 1) return; // not double-tap
+	 
+	        e.preventDefault(); // double tap - prevent the zoom
+	        // also synthesize click events we just swallowed up
+	        $(this).trigger('click').trigger('click');
+	      });
+	  };
+	})(jQuery);
+	// Detect mobile interface
+	(function(a,b){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))){
+		$('.container').css("display","none")
+		device = "mobile"
+	}else{
+		device = "web"
+		$('.container_mobile').css("display","none")
+	}})(navigator.userAgent||navigator.vendor||window.opera,'http://detectmobilebrowser.com/mobile');
+	// Actual code
+	$('.coins img').nodoubletapzoom()
 	chi_sq_3 = new ChiSquare(3)
 	chi_sq_4 = new ChiSquare(4)
 	$('.coins img').on('click', function (e) {
+		var coinPressed = $(e.currentTarget)
+		coinPressed.css('opacity','1')
+		setTimeout(function () {
+			coinPressed.css('opacity','0.5')
+		}, 200)
 		if (charCount >= 200) {
 			return
 		}
 		var clicked = $(e.currentTarget).attr('name')
 		addToSequence(clicked)
+	})
+
+	$('.container_mobile .mob_rand_seq').on('click', function (e) {
+		displayPreProgrammed('cg')
 	})
 
 	$(window).on('keypress', function (e) {
@@ -56,6 +98,7 @@ $(document).ready(function () {
 			addToSequence("tails")
 		}
 	})
+
 
 	$('.rand_opt').on('change', function (e) {
 		var value = $(e.currentTarget).val()
@@ -113,12 +156,14 @@ function generateRandomString(n) {
 function calcHumanProb(seq) {
 	var chi3 = chi_sq_3.calcChiSquare(seq),
 			chi4 = chi_sq_4.calcChiSquare(seq)
-			gaps = gapTest(seq),
+			gaps = GapTest(seq),
 			probGap = 1 - chi_sq_3.getProbability(3, gaps)
 			prob3 = 1 - chi_sq_3.getProbability(7, chi3),
-			prob4 = 1 - chi_sq_4.getProbability(15, chi3),
+			prob4 = 1 - chi_sq_4.getProbability(15, chi4),
 			chi_avg = (prob3 + prob4)/2,
-			prob = Math.max(chi_avg, probGap)
+			prob = Math.max(chi_avg, probGap),
+			coupons = CouponsTest(seq, 4)
+	// console.log(prob3, prob4)
 	updateResult(prob, seq.length)
 }
 
@@ -149,48 +194,6 @@ function probFromChi(chi, n) {
 	return 0
 }
 
-function gapTest(str) {
-	var gaps = [],
-		curr_gap = 0,
-		count = 0
-	for (var i=0; i<str.length; i++) {
-		if (count) {
-			curr_gap++
-		}
-		if (str[i] == '1') {
-			if (count) {
-				gaps.push(curr_gap-1)
-				curr_gap = 0
-			} else {
-				count = 1
-			}
-		}
-	}
-	var test_gaps = {0:0,1:0,2:0,3:0},
-		exp_gaps = {
-			0: gaps.length/2,
-			1: gaps.length/4,
-			2: gaps.length/8,
-			3: gaps.length/8
-		}
-	gaps.forEach(function (g) {
-		if (g > 2) {
-			test_gaps[3]++
-		} else {
-			test_gaps[g]++
-		}
-	})
-
-	// console.log(test_gaps, exp_gaps)
-
-	var cs = 0
-	for (var i = 0; i<4; i++) {
-		cs += ((test_gaps[i] - exp_gaps[i])*(test_gaps[i] - exp_gaps[i]))/exp_gaps[i]
-	}
-
-	return cs
-}
-
 function reset(opt) {
 	charCount = 0
 	var id = window.setTimeout(function() {}, 0);
@@ -198,7 +201,14 @@ function reset(opt) {
 	    window.clearTimeout(id); // will do nothing if no timeout with id is present
 	}
 	$('.current_sequence').html("")
-	$('.result').html("")
+	if (device == "web") {
+		$('.result').html("Click on Coins or press<br>'H' or 'T' to start!")
+	} else {
+		$('.result').html("Click on either coin to start!")
+	}
+	$('.container_mobile .mob_rand_seq').css('display','')
+	$('.result').css('color', '#fff')
+	$('.result').css('background-color','#2d6da8')
 	if (!opt) {
 		$('.rand_opt').val('default')
 	}
@@ -206,11 +216,13 @@ function reset(opt) {
 }
 
 function updateResult(n, count) {
-	if (count < 50) {
-		$('.result').css('background-color', "#fff")
+	$('.container_mobile .mob_rand_seq').css('display','none')
+	if (count < START_ANALYSIS_AT) {
+		$('.result').css('background-color', "#2d6da8")
 		$('.result').html("Keep going!" + "<br>" + count.toString() + " tosses complete")
 		return
 	}
+	$('.result').css('color','#fff')
 	if (n < 0.9) {
 		$('.result').css('background-color', GREEN)
 		$('.result').html("Looks random" + "<br>" + count.toString() + " tosses complete")
