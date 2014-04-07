@@ -7,6 +7,9 @@ module.exports = function (app, io) {
 		randomStrings = require('../app/controllers/randomStrings.js'),
 		passport = require('passport');
 
+	app.get('/hackillinois', function (req, res) {
+		res.render("workshop")
+	})
 	app.get('/Math199CHP', function (req, res) {
 		res.render("math199")
 	})

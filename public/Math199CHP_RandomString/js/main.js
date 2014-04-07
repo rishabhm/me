@@ -163,7 +163,6 @@ function calcHumanProb(seq) {
 			chi_avg = (prob3 + prob4)/2,
 			prob = Math.max(chi_avg, probGap),
 			coupons = CouponsTest(seq, 4)
-	// console.log(prob3, prob4)
 	updateResult(prob, seq.length)
 }
 
