@@ -310,7 +310,7 @@ $(document).ready(function () {
 	          , dt = t2 - t1
 	          , fingers = e.originalEvent.touches.length;
 	        $(this).data('lastTouch', t2);
-	        if (!dt || dt > 100 || fingers > 1) return; // not double-tap
+	        if (!dt || dt > 250 || fingers > 1) return; // not double-tap
 	 
 	        e.preventDefault(); // double tap - prevent the zoom
 			/**
