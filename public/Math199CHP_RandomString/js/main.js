@@ -14,7 +14,7 @@ var GREEN = "#15b01a",
 	BLUE = "#3366CC"
 
 
-var START_ANALYSIS_AT = 5
+var START_ANALYSIS_AT = 10
 
 var socket = io.connect("/")
 
