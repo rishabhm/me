@@ -518,7 +518,7 @@ function calcProb(seq) {
 function sleep(seq, n) {
 	setTimeout(function () {
 		sim(seq, n)
-	}, (n)*50)
+	}, (n)*250)
 }
 
 function sim(seq, j) {
@@ -713,7 +713,7 @@ function testing() {
 	// graph_strings.forEach(function (s) {
 	// 	calcHumanProb(s)
 	// })
-	calcProb(generateRandomString(200))
+	// calcProb(generateRandomString(200))
 	// calcProb("10010011010011101011010110111010110001010100101101010110100011101000101110110001010100101000010111010010100010010111101000101101010001101001001011010011101000110100110101110110000101101110101000101101")
 	// calcHumanProb(human_strings[human_strings.length - 1])
 }
