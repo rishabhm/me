@@ -16,6 +16,9 @@ body {
 	background-color: #2d6da8;
 	padding: 10px;
 	color: #fff;
+	position: fixed;
+	left: 0;
+	z-index: 100;
 }
 
 .right_col {
@@ -23,6 +26,9 @@ body {
 	vertical-align: top;
 	width: 70%;	
 	height: 100%;
+	margin-left: 22%;
+	/*float: right;*/
+	/*overflow: scroll;*/
 }
 
 h1 {
@@ -67,7 +73,7 @@ h1 {
 
 .random_options {
 	margin: 20px auto;
-	width: 240px;
+	width: 90%;
    	height: 34px;
    	overflow: hidden;
    	background: url("../resources/down_arrow_select.jpg") no-repeat right #ddd;
@@ -162,4 +168,14 @@ select {
 	background-color: #fa8400;
 	letter-spacing: 2;
 	cursor: pointer;
+}
+
+.disp_chart {
+	width: 100%;
+	overflow-x: scroll;
+	padding: 15px 5%;
+}
+
+#myChart {
+	margin-left: -5%;
 }

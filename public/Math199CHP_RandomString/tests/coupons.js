@@ -28,11 +28,16 @@ var CouponsTest = function (str, n) {
 			maxInd = currInd
 		}
 	})
+
+	var p_value
+
 	if (found == Math.pow(2,n)) {
-		console.log("Coupon data : " + CouponsData[n][maxInd + n].toString())
+		p_value = CouponsData[maxInd + n]
+		return p_value
 	} else {
-		console.log("Coupon data : " + CouponsData[n]['not_found'].toString())
+		return Math.max(0.5, CouponsData[str.length])
 	}
+
 }
 
 exports.CouponsTest = CouponsTest

@@ -36,9 +36,10 @@ function GapTest(str) {
 	
 	var cs = 0
 	for (var i = 0; i<4; i++) {
-		cs += ((test_gaps[i] - exp_gaps[i])*(test_gaps[i] - exp_gaps[i]))/exp_gaps[i]
+		if (test_gaps[i] && exp_gaps[i])
+			cs += ((test_gaps[i] - exp_gaps[i])*(test_gaps[i] - exp_gaps[i]))/exp_gaps[i]
 	}
-
+	// console.log("Gaps test : ", cs, str.length)
 	return cs
 }
 

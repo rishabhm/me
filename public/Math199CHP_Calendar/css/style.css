@@ -1,0 +1,31 @@
+body {
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+	color: #444;
+	margin: 0;
+	width: 100%;
+}
+
+.month {
+	margin: 5px;
+	display: inline-block;
+	/*width: 300px;*/
+	text-align: center;
+}
+
+.heading {
+	text-align: center;
+	background-color: #555;
+	color: #fff;
+}
+
+td {
+	padding: 5px 7px;
+}
+
+.tables {
+	padding: 5px;
+	border: 2px solid #000;
+	display: inline-block;
+	width: 90%;
+}
