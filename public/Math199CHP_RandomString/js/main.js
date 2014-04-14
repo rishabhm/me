@@ -321,7 +321,7 @@ $(document).ready(function () {
 				- Rishabh 
 			**/	                         
 	        // also synthesize click events we just swallowed up
-	        // $(this).trigger('click').trigger('click');
+	        $(this).trigger('click').trigger('click');
 	      });
 	  };
 	})(jQuery);
