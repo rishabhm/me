@@ -15,7 +15,7 @@ var GREEN = "#15b01a",
 
 
 var START_ANALYSIS_AT = 10,
-	SLEEP_TIME = 50
+	SLEEP_TIME = 250
 
 var socket = io.connect("/")
 
