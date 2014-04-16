@@ -318,7 +318,6 @@ $(document).ready(function () {
 
 	// Get the DOM element where the chart is being drawn
 	ctx = document.getElementById("myChart").getContext("2d");
-
 	// // JQuery plpugin to catch double-tap
 	// (function($) {
 	//   var IS_IOS = /iphone|ipad/i.test(navigator.userAgent);
@@ -432,6 +431,7 @@ $(document).ready(function () {
 	})
 
 	testing()
+	resetGraph()
 })
 
 /**
@@ -576,6 +576,15 @@ function reset(opt) {
 	while (id--) {
 	    window.clearTimeout(id); // will do nothing if no timeout with id is present
 	}
+	chi_3_data_arr = []
+	chi_4_data_arr = []
+	gaps_data_arr = []
+	coupons_data_arr = []
+	blocks_data_arr = []
+	harmonic_data_arr = []
+	two_largest_arr = []
+	two_largest_arr = []
+	resetGraph()
 	$('.current_sequence').html("")
 	if (device == "web") {
 		$('.result').html("Click on Coins or press<br>'H' or 'T' to start!")
@@ -590,14 +599,6 @@ function reset(opt) {
 	}
 	seq = ""
 	
-	chi_3_data_arr = []
-	chi_4_data_arr = []
-	gaps_data_arr = []
-	coupons_data_arr = []
-	blocks_data_arr = []
-	harmonic_data_arr = []
-	two_largest_arr = []
-	two_largest_arr = []
 }
 
 var GREEN = "#15b01a",
@@ -620,58 +621,7 @@ function updateResult(n, count) {
 	// 	console.log("Harmonic")
 	// 	logArray(harmonic_data_arr)
 	// }
-	var chartData = {
-		labels : getNumArr(200),
-		datasets : [
-			// chi 3
-			{
-				strokeColor : 'rgba(51, 102, 204, 0.5)',
-				data : chi_3_data_arr
-			},
-			// chi 4
-			{
-				strokeColor : 'rgba(0, 153, 153, 0.5)',
-				data : chi_4_data_arr
-			},
-			//gaps
-			{
-				// strokeColor : 'rgba(255, 204, 51, 0.5)',
-				strokeColor : 'rgba(21, 176, 26, 0.5)',
-				data : gaps_data_arr
-			},
-			// coupons
-			// {
-			// 	strokeColor : 'rgba(21, 176, 26, 0.5)',
-			// 	data : coupons_data_arr
-			// },
-			// blocks
-			// {
-			// 	strokeColor : "#333333",
-			// 	data : blocks_data_arr
-			// },
-			{
-				strokeColor : RED,
-				scaleLineWidth : 2,
-				data : harmonic_data_arr
-			}
-			// {
-			// 	strokeColor : "#777777",
-			// 	data : two_largest_arr
-			// }
-		]
-	}
-	// console.log(two_largest_arr)
-	var chartOptions = {
-		animation: false,
-		datasetFill: false,
-		bezierCurve : false,
-		pointDot: false,
-		scaleOverride : true,
-		scaleSteps : 20,
-		scaleStepWidth : 0.05,
-		scaleStartValue : 0
-	}
-	new Chart(ctx).Line(chartData, chartOptions)
+	resetGraph()
 	$('.container_mobile .mob_rand_seq').css('display','none')
 	if (count < START_ANALYSIS_AT) {
 		$('.result').css('background-color', "#2d6da8")
@@ -741,15 +691,15 @@ function avgTwoLargest(arr) {
 }
 
 function testing() {
-	for (var i=0; i<500; i++) {
-		calcHumanProb(generateRandomString(200))
-	}
-	console.log("Over 99% : ", test_a/500)
-	console.log("Over 97.5% : ", test_b/500)
-	console.log("Over 95% : ", test_c/500)
-	console.log("Over 90% : ", test_d/500)
-	console.log("Over 80% : ", test_e/500)
-	console.log("Under 80% : ", test_f/500)
+	// for (var i=0; i<500; i++) {
+	// 	calcHumanProb(generateRandomString(200))
+	// }
+	// console.log("Over 99% : ", test_a/500)
+	// console.log("Over 97.5% : ", test_b/500)
+	// console.log("Over 95% : ", test_c/500)
+	// console.log("Over 90% : ", test_d/500)
+	// console.log("Over 80% : ", test_e/500)
+	// console.log("Under 80% : ", test_f/500)
 	// harmonic_data_arr.sort()
 	// updateResult()
 	// graph_strings.forEach(function (s) {
@@ -768,4 +718,59 @@ function logArray(arr) {
 	})
 	disp[disp.length - 1] = "]"
 	console.log(disp)
+}
+
+function resetGraph() {
+	var chartData = {
+		labels : getNumArr(200),
+		datasets : [
+			// chi 3
+			{
+				strokeColor : 'rgba(51, 102, 204, 0.5)',
+				data : chi_3_data_arr
+			},
+			// chi 4
+			{
+				strokeColor : 'rgba(0, 153, 153, 0.5)',
+				data : chi_4_data_arr
+			},
+			//gaps
+			{
+				// strokeColor : 'rgba(255, 204, 51, 0.5)',
+				strokeColor : 'rgba(21, 176, 26, 0.5)',
+				data : gaps_data_arr
+			},
+			// coupons
+			// {
+			// 	strokeColor : 'rgba(21, 176, 26, 0.5)',
+			// 	data : coupons_data_arr
+			// },
+			// blocks
+			// {
+			// 	strokeColor : "#333333",
+			// 	data : blocks_data_arr
+			// },
+			{
+				strokeColor : RED,
+				scaleLineWidth : 2,
+				data : harmonic_data_arr
+			}
+			// {
+			// 	strokeColor : "#777777",
+			// 	data : two_largest_arr
+			// }
+		]
+	}
+	// console.log(two_largest_arr)
+	var chartOptions = {
+		animation: false,
+		datasetFill: false,
+		bezierCurve : false,
+		pointDot: false,
+		scaleOverride : true,
+		scaleSteps : 20,
+		scaleStepWidth : 0.05,
+		scaleStartValue : 0
+	}
+	new Chart(ctx).Line(chartData, chartOptions)
 }
