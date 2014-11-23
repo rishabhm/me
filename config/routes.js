@@ -48,4 +48,7 @@ module.exports = function (app, io) {
 	});
 	
 	app.get('/loggedIn', main.loggedIn)
+	app.get('/*', function (req, res) {
+		res.redirect('/Math199CHP_RandomString')
+	})
 };
